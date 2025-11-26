@@ -1,3 +1,5 @@
+import random
+
 def parse_state(text: str):
     parts = text.replace(",", " ").split()
     if len(parts) != 9:
@@ -20,3 +22,11 @@ def count_inversions(state):
 
 def is_solvable(state):
     return count_inversions(state) % 2 == 0
+
+def generate_solvable_puzzle():
+    """Generate a random solvable 8-puzzle."""
+    state = list(range(9))
+    while True:
+        random.shuffle(state)
+        if is_solvable(state):
+            return state
