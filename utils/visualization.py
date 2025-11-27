@@ -9,9 +9,7 @@ def render_state_html(state, tile_size=70):
     .tile {{
         width: {tile_size}px;
         height: {tile_size}px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: flex; justify-content: center; align-items: center;
         background: #e0e0e0;
         border-radius: 12px;
         font-size: {tile_size*0.45}px;

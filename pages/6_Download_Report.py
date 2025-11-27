@@ -1,29 +1,39 @@
 import streamlit as st
-import pandas as pd
-from io import StringIO
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from utils.puzzle import parse_state
+from utils.algorithms import astar
 
-st.title("📄 Download Your Report")
+st.title("📄 Download PDF Report")
 
-st.markdown("""
-Export your algorithm comparison, path details, heuristics, and notes.
-""")
+start = st.text_input("Start", "1 8 7 0 3 5 2 4 6")
+goal  = st.text_input("Goal", "1 2 3 4 5 6 7 8 0")
 
-txt = st.text_area("Notes (optional)", "My observations:")
+if st.button("Generate PDF"):
 
-report = f"""
-AI Search Lab Report
-=====================
+    start = parse_state(start)
+    goal = parse_state(goal)
 
-{txt}
+    path, expanded = astar(start, goal, "manhattan")
 
-Generated using the AI Search Teaching Tool.
-"""
+    filename = "report.pdf"
+    c = canvas.Canvas(filename, pagesize=letter)
 
-# Markdown file download
-st.download_button(
-    "Download Markdown Report",
-    data=report,
-    file_name="ai_search_report.md",
-    mime="text/markdown"
-)
+    c.drawString(40, 750, "AI Search Report")
+    c.drawString(40, 730, f"Start: {start}")
+    c.drawString(40, 710, f"Goal: {goal}")
+    c.drawString(40, 690, f"Moves: {len(path)-1}")
+    c.drawString(40, 670, f"Expanded Nodes: {expanded}")
 
+    y = 640
+    for i, step in enumerate(path):
+        c.drawString(40, y, f"Step {i}: {step}")
+        y -= 20
+        if y < 50:
+            c.showPage()
+            y = 750
+
+    c.save()
+
+    with open(filename, "rb") as f:
+        st.download_button("Download PDF", f, "ai_search_report.pdf")

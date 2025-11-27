@@ -3,56 +3,27 @@ import streamlit as st
 st.title("📘 Theory and Notes")
 
 st.markdown("""
-This page explains:
+## 🔹 BFS
+- Optimal
+- Complete
+- Large memory use
 
-## 🔹 Breadth-First Search  
-- Completeness  
-- Optimality  
-- Time/space complexity  
-- How frontier grows  
-- Perfect for short paths
+## 🔹 DFS
+- Low memory
+- Not optimal
+- Can loop
 
----
+## 🔹 Greedy Best First
+- Uses only h(n)
+- Fast but not optimal
 
-## 🔹 Depth-First Search  
-- Not optimal  
-- Low memory  
-- Deep but blind search  
-- Risks infinite loops
+## 🔹 A* Search
+### f(n) = g(n) + h(n)
+- Optimal if h is admissible
+- Misplaced Tile
+- Manhattan Distance
+- Linear Conflict
 
----
-
-## 🔹 Greedy Best First  
-- Very fast  
-- Uses heuristic only  
-- Not optimal  
-- Prone to local minima
-
----
-
-## 🔹 A* Search  
-### f(n) = g(n) + h(n)  
-- **g(n)** = cost so far  
-- **h(n)** = heuristic  
-- **f(n)** = priority  
-- Optimal if heuristic is admissible  
-
-### Heuristics:
-- Misplaced tile  
-- Manhattan distance  
-- Linear conflict (strongest)
-
----
-
-## 🔹 Solvability  
-8-puzzle is solvable iff the inversion count is even.
-
----
-
-## 🔹 Trees vs Graph Search  
-- Frontier  
-- Closed set  
-- Expansion pattern  
+## 🔹 Solvability
+Even inversion count ⇒ solvable.
 """)
-
-st.info("Use the left sidebar to try algorithms interactively.")
