@@ -1,6 +1,4 @@
-reportlab
-matplotlib
-networkxstreamlit
+streamlit
 reportlab
 matplotlib
 networkx
